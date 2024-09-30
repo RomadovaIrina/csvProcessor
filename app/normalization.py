@@ -1,7 +1,7 @@
 import re
 
 
-def normalize_phone(phone_number):
+def normalize_phone(phone_number) -> str:
     # Заменяем подходящее под паттерн на пустоту
     # заменяем все что является
     digits = re.sub(r'[^\d]', '', phone_number)
@@ -13,20 +13,19 @@ def normalize_phone(phone_number):
                   r'+7(\1)\2-\3-\4', digits)
 
 
-def normalize_name(name):
+def normalize_name(name) -> str:
     return re.sub(r'\s+', ' ', name).strip()
 
 
-def normalize_amount(amount):
+def normalize_amount(amount) -> float:
     return float(amount.replace(' ', '').replace(',', '.'))
 
 
-
-
-def normalize_data(data, normalizers):
+def normalize_data(data, normalizers) -> list:
     for line in data:
         for key, value in line.items():
-            # Применяем функцию нормализации, если она существует для текущего ключа
+            # Применяем функцию нормализации,
+            # если она существует для текущего ключа
             normalize_func = normalizers.get(key, lambda x: x)
             line[key] = normalize_func(value)
     return data
