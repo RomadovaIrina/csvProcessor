@@ -9,7 +9,7 @@ def test_invalid_mime_type():
         "/csv-processor/",
         files={"file": ("test.txt", "Erron, invalid type", "text/plain")}
     )
-    assert response.status_code == 400
+    assert response.status_code == 415
     assert response.json() == {"detail": "Invalid file type. Supported types: csv"}
 
 

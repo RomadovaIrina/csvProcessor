@@ -29,3 +29,9 @@ def normalize_data(data, normalizers) -> list:
             normalize_func = normalizers.get(key, lambda x: x)
             line[key] = normalize_func(value)
     return data
+
+normalizers = {
+    'phone': normalize_phone,
+    'fullname': normalize_name,
+    'some_amount': normalize_amount
+}
